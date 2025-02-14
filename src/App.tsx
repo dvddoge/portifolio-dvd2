@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SkillBar from './components/SkillBar';
 import ExperienceCard from './components/ExperienceCard';
 import ProjectCard from './components/ProjectCard';
@@ -6,9 +6,42 @@ import AboutSection from './components/AboutSection';
 import './styles/global.css';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    const createParticle = () => {
+      const particles = document.querySelector('.cyber-particles');
+      if (!particles) return;
+
+      const particle = document.createElement('div');
+      particle.className = 'cyber-particle';
+      
+      // Posição aleatória horizontal
+      particle.style.left = `${Math.random() * 100}%`;
+      
+      // Velocidade aleatória
+      const duration = 10 + Math.random() * 20;
+      particle.style.animation = `particleFloat ${duration}s infinite linear`;
+      
+      particles.appendChild(particle);
+      
+      // Remove a partícula após a animação
+      setTimeout(() => {
+        particle.remove();
+      }, duration * 1000);
+    };
+
+    // Cria partículas em intervalos
+    const interval = setInterval(() => {
+      createParticle();
+    }, 500);
+
+    // Limpa o intervalo quando o componente é desmontado
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <div className="cyber-grid" />
+      <div className="cyber-particles" />
       <nav className="nav-container">
         <div className="nav-links">
           <a href="#inicio" className="nav-link">INÍCIO</a>

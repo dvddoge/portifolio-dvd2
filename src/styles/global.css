@@ -22,6 +22,29 @@ body {
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 0%, var(--background) 100%),
+    repeating-linear-gradient(transparent 0%, transparent 2px, rgba(92, 103, 255, 0.1) 3px, transparent 3px, transparent 9px),
+    repeating-linear-gradient(90deg, transparent 0%, transparent 2px, rgba(92, 103, 255, 0.1) 3px, transparent 3px, transparent 9px);
+  animation: backgroundPulse 8s ease infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes backgroundPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 .cyber-grid {
@@ -30,10 +53,20 @@ body {
   pointer-events: none;
   z-index: 0;
   opacity: 0.1;
+  background-size: 30px 30px;
+  animation: gridMove 20s linear infinite;
   background-image: 
     linear-gradient(var(--accent) 1px, transparent 1px),
     linear-gradient(90deg, var(--accent) 1px, transparent 1px);
-  background-size: 30px 30px;
+}
+
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 30px;
+  }
 }
 
 .cyber-grid::before {
@@ -45,6 +78,37 @@ body {
     transparent 0%,
     var(--background) 100%
   );
+}
+
+.cyber-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cyber-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 50%;
+  filter: blur(1px);
+  animation: particleFloat 15s infinite linear;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px);
+    opacity: 0;
+  }
 }
 
 .page-container {
