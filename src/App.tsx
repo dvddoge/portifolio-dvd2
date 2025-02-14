@@ -1,8 +1,8 @@
 import React from 'react';
-import CyberCard from './components/CyberCard';
 import SkillBar from './components/SkillBar';
 import ExperienceCard from './components/ExperienceCard';
 import ProjectCard from './components/ProjectCard';
+import AboutSection from './components/AboutSection';
 import './styles/global.css';
 
 const App: React.FC = () => {
@@ -34,18 +34,29 @@ const App: React.FC = () => {
 
         <section id="sobre" className="section">
           <h2 className="section-title">SOBRE MIM</h2>
-          <div className="about-content">
-            <div className="about-text">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae justo nec nunc vestibulum tincidunt.</p>
-              <p>Praesent quis sagittis libero, nec suscipit justo. Maecenas aliquet maximus.</p>
-            </div>
-            <CyberCard
-              title="QUEM SOU"
-              subtitle="DESENVOLVEDOR"
-              highlight="APAIXONADO"
-              prompt="SAIBA MAIS"
-            />
-          </div>
+          <AboutSection
+            description={[
+              "Desenvolvedor Full Stack apaixonado por criar soluções inovadoras e impactantes. Com mais de 5 anos de experiência no desenvolvimento de aplicações web e mobile, sempre busco combinar criatividade com as melhores práticas de programação.",
+              "Especializado em tecnologias modernas como React, Node.js e TypeScript, tenho um histórico comprovado de entrega de projetos complexos e escaláveis. Minha abordagem é focada em código limpo, performance e experiência do usuário.",
+              "Além do desenvolvimento, sou um entusiasta de novas tecnologias e sempre estou aprendendo e experimentando as últimas tendências do mercado."
+            ]}
+            stats={[
+              { label: "ANOS DE EXPERIÊNCIA", value: "5+" },
+              { label: "PROJETOS CONCLUÍDOS", value: "30+" },
+              { label: "CLIENTES SATISFEITOS", value: "20+" },
+              { label: "TECNOLOGIAS DOMINADAS", value: "15+" }
+            ]}
+            interests={[
+              "Desenvolvimento Web",
+              "Inteligência Artificial",
+              "Cloud Computing",
+              "Cybersegurança",
+              "Mobile",
+              "IoT",
+              "DevOps",
+              "UI/UX"
+            ]}
+          />
         </section>
 
         <section id="experiencia" className="section">
