@@ -7,6 +7,12 @@
   background: var(--card-bg);
   border-radius: 15px;
   border: 1px solid rgba(92, 103, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 255, 170, 0.1);
 }
 
 .about-main {
@@ -28,6 +34,13 @@
   font-size: 1.1rem;
   position: relative;
   padding-left: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.about-description p:hover {
+  color: var(--text);
+  transform: translateX(10px);
 }
 
 .about-description p::before {
@@ -39,6 +52,12 @@
   height: calc(100% - 1rem);
   background: linear-gradient(to bottom, var(--primary), var(--secondary));
   border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.about-description p:hover::before {
+  width: 6px;
+  box-shadow: 0 0 15px var(--primary);
 }
 
 .about-stats {
@@ -54,6 +73,26 @@
   border-radius: 10px;
   text-align: center;
   overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.stat-item:hover {
+  background: rgba(92, 103, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 255, 170, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-item:hover::before {
+  opacity: 1;
 }
 
 .stat-value {
@@ -63,6 +102,13 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.stat-item:hover .stat-value {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(0, 255, 170, 0.5));
 }
 
 .stat-label {
@@ -133,6 +179,26 @@
   gap: 1rem;
   padding: 1rem;
   transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.interest-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.interest-item:hover::before {
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+.interest-item:hover {
+  transform: translateY(-5px);
 }
 
 .interest-icon {
@@ -142,6 +208,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .icon-border {
@@ -170,13 +237,6 @@
   transition: all 0.3s ease;
 }
 
-.interest-text {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  text-align: center;
-  letter-spacing: 1px;
-}
-
 .interest-item:hover .icon-border {
   opacity: 1;
   transform: rotate(45deg);
@@ -191,6 +251,34 @@
   transform: scale(1.1);
 }
 
+.interest-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-align: center;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.interest-item:hover .interest-text {
+  color: var(--primary);
+}
+
+.interest-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.interest-item:hover .interest-text::after {
+  width: 100%;
+}
+
 .about-decoration {
   width: 100px;
   height: 100%;
@@ -201,6 +289,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.about-container:hover .cyber-circuit {
+  opacity: 1;
 }
 
 .circuit-line {
@@ -208,6 +302,29 @@
   align-items: center;
   gap: 0.5rem;
   opacity: 0.5;
+  transform: translateX(-20px);
+  transition: all 0.3s ease;
+}
+
+.about-container:hover .circuit-line {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.about-container:hover .circuit-line:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.about-container:hover .circuit-line:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.about-container:hover .circuit-line:nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+.about-container:hover .circuit-line:nth-child(5) {
+  transition-delay: 0.4s;
 }
 
 .node {
@@ -216,12 +333,33 @@
   background: var(--primary);
   border-radius: 50%;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.about-container:hover .node {
+  animation: glowNode 2s infinite;
+}
+
+@keyframes glowNode {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--primary);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--primary);
+  }
 }
 
 .line {
   height: 2px;
   flex-grow: 1;
   background: linear-gradient(90deg, var(--primary), transparent);
+  transform: scaleX(0.8);
+  transform-origin: left;
+  transition: all 0.3s ease;
+}
+
+.about-container:hover .line {
+  transform: scaleX(1);
 }
 
 @media (max-width: 1200px) {
