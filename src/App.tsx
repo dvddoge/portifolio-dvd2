@@ -2,6 +2,7 @@ import React from 'react';
 import CyberCard from './components/CyberCard';
 import SkillBar from './components/SkillBar';
 import ExperienceCard from './components/ExperienceCard';
+import ProjectCard from './components/ProjectCard';
 import './styles/global.css';
 
 const App: React.FC = () => {
@@ -22,7 +23,7 @@ const App: React.FC = () => {
       <div className="page-container">
         <section id="inicio" className="hero-section">
           <div>
-            <h1 className="hero-title">SEU NOME<br />DESENVOLVEDOR</h1>
+            <h1 className="hero-title">DEYVID JERÔNIMO<br />DESENVOLVEDOR</h1>
             <p className="hero-subtitle">FULL STACK DEVELOPER</p>
             <div className="hero-buttons">
               <button className="cyber-button">CONTATE-ME</button>
@@ -70,23 +71,31 @@ const App: React.FC = () => {
         <section id="projetos" className="section">
           <h2 className="section-title">PROJETOS</h2>
           <div className="card-grid">
-            <CyberCard
-              title="E-COMMERCE"
-              subtitle="WEB APP"
-              highlight="REACT"
-              prompt="VER PROJETO"
+            <ProjectCard
+              title="E-COMMERCE CYBERPUNK"
+              type="WEB APP"
+              description="Uma plataforma de e-commerce moderna com design cyberpunk, desenvolvida com React e Node.js. Inclui sistema de pagamentos, carrinho de compras e painel administrativo."
+              image="/images/ecommerce-preview.jpg"
+              technologies={["React", "Node.js", "MongoDB", "Stripe"]}
+              demoLink="https://cyber-shop.exemplo.com"
+              githubLink="https://github.com/seu-usuario/cyber-shop"
             />
-            <CyberCard
-              title="SOCIAL APP"
-              subtitle="MOBILE"
-              highlight="FLUTTER"
-              prompt="VER PROJETO"
+            <ProjectCard
+              title="REDE SOCIAL FUTURISTA"
+              type="FULL STACK"
+              description="Aplicação de rede social com interface futurista, recursos de chat em tempo real, compartilhamento de posts e sistema de notificações."
+              image="/images/social-preview.jpg"
+              technologies={["React", "Socket.io", "Express", "PostgreSQL"]}
+              demoLink="https://cyber-social.exemplo.com"
+              githubLink="https://github.com/seu-usuario/cyber-social"
             />
-            <CyberCard
-              title="API REST"
-              subtitle="BACKEND"
-              highlight="NODE.JS"
-              prompt="VER PROJETO"
+            <ProjectCard
+              title="API GESTÃO DE DADOS"
+              type="BACKEND"
+              description="API RESTful robusta para gestão de dados empresariais, com autenticação JWT, cache Redis e documentação Swagger."
+              image="/images/api-preview.jpg"
+              technologies={["Node.js", "Express", "Redis", "JWT"]}
+              githubLink="https://github.com/seu-usuario/cyber-api"
             />
           </div>
         </section>
