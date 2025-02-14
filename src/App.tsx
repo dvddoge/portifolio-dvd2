@@ -8,16 +8,9 @@ import './styles/global.css';
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [showGlitch, setShowGlitch] = useState(false);
 
   const handleLoadingComplete = () => {
-    setShowGlitch(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setTimeout(() => {
-        setShowGlitch(false);
-      }, 1000);
-    }, 500);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -66,7 +59,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <div className={`app-container ${showGlitch ? 'glitch-transition' : ''}`}>
+      <div className="app-container">
         <div className="cyber-grid" />
         <div className="cyber-particles" />
         <nav className="nav-container">
@@ -82,7 +75,7 @@ const App: React.FC = () => {
 
         <div className="page-container">
           <section id="inicio" className="hero-section">
-            <div>
+      <div>
               <h1 className="hero-title">DEYVID JERÔNIMO<br />DESENVOLVEDOR</h1>
               <p className="hero-subtitle">FULL STACK DEVELOPER</p>
               <div className="hero-buttons">
@@ -233,8 +226,8 @@ const App: React.FC = () => {
               </a>
               <a href="#" className="social-link" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-twitter"></i>
-              </a>
-            </div>
+        </a>
+      </div>
           </section>
         </div>
       </div>

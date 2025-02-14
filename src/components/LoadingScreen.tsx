@@ -7,6 +7,7 @@ interface LoadingScreenProps {
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
   const [percentage, setPercentage] = useState(0);
+  const [isExiting, setIsExiting] = useState(false);
   const [glitchText] = useState(() => {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
     return [...Array(5)].map(() => 
@@ -21,7 +22,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
       setPercentage(prev => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onLoadingComplete, 500);
+          handleLoadingComplete();
           return 100;
         }
         return prev + 1;
@@ -29,22 +30,44 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
     }, 30);
 
     return () => clearInterval(interval);
-  }, [onLoadingComplete]);
+  }, []);
+
+  const handleLoadingComplete = () => {
+    setIsExiting(true);
+    setTimeout(() => {
+      onLoadingComplete();
+    }, 500); // Tempo da animação de saída
+  };
+
+  useEffect(() => {
+    const createParticle = () => {
+      const particles = document.querySelector('.loading-particles');
+      if (!particles) return;
+
+      const particle = document.createElement('div');
+      particle.className = 'loading-particle';
+      particle.style.left = `${Math.random() * 100}%`;
+      
+      const duration = 4 + Math.random() * 4;
+      particle.style.animation = `particleRise ${duration}s infinite linear`;
+      
+      particles.appendChild(particle);
+      
+      setTimeout(() => {
+        particle.remove();
+      }, duration * 1000);
+    };
+
+    const particleInterval = setInterval(createParticle, 200);
+
+    return () => clearInterval(particleInterval);
+  }, []);
 
   return (
-    <div className="loading-screen">
-      <div className="glitch-overlay">
-        {[...Array(10)].map((_, i) => (
-          <div key={i} className="glitch-line" style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            width: `${Math.random() * 100}px`,
-            animationDelay: `${Math.random() * 2}s`
-          }}></div>
-        ))}
-      </div>
-      
-      <div className="cyber-loading">
+    <div className={`loading-screen ${isExiting ? 'fade-out' : ''}`}>
+      <div className="cyber-grid" />
+      <div className="loading-particles" />
+      <div className={`cyber-loading ${isExiting ? 'fade-out' : ''}`}>
         <div className="loading-text">INICIALIZANDO SISTEMA</div>
         <div className="loading-bar-container">
           <div className="loading-bar">
@@ -69,33 +92,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
         <div className="cyber-circles">
           {[...Array(3)].map((_, i) => (
             <div key={i} className="cyber-circle"></div>
-          ))}
-        </div>
-
-        <div className="cyber-glitch-effect">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="glitch-line" style={{
-              animationDelay: `${i * 0.2}s`
-            }}></div>
-          ))}
-        </div>
-
-        <div className="corner-decorations">
-          <div className="corner top-left"></div>
-          <div className="corner top-right"></div>
-          <div className="corner bottom-left"></div>
-          <div className="corner bottom-right"></div>
-        </div>
-
-        <div className="matrix-effect">
-          {[...Array(20)].map((_, i) => (
-            <div key={i} className="matrix-line">
-              {[...Array(20)].map((_, j) => (
-                <span key={j} className="matrix-character">
-                  {String.fromCharCode(0x30A0 + Math.random() * 96)}
-                </span>
-              ))}
-            </div>
           ))}
         </div>
       </div>

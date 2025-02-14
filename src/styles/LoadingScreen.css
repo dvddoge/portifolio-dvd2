@@ -6,30 +6,12 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  animation: screenGlitch 0.3s infinite;
+  overflow: hidden;
+  transition: opacity 0.5s ease;
 }
 
-@keyframes screenGlitch {
-  0% {
-    transform: translate(0);
-    filter: hue-rotate(0deg);
-  }
-  25% {
-    transform: translate(1px, -1px);
-    filter: hue-rotate(15deg);
-  }
-  50% {
-    transform: translate(-1px, 1px);
-    filter: hue-rotate(-15deg);
-  }
-  75% {
-    transform: translate(1px, -1px);
-    filter: hue-rotate(30deg);
-  }
-  100% {
-    transform: translate(0);
-    filter: hue-rotate(0deg);
-  }
+.loading-screen.fade-out {
+  opacity: 0;
 }
 
 .cyber-loading {
@@ -41,101 +23,11 @@
   border-radius: 15px;
   border: 1px solid rgba(92, 103, 255, 0.2);
   overflow: hidden;
-  animation: containerGlitch 2s infinite;
+  transition: opacity 0.5s ease;
 }
 
-@keyframes containerGlitch {
-  0% {
-    clip-path: inset(0 0 0 0);
-  }
-  5% {
-    clip-path: inset(10% -6px 85% 0);
-  }
-  10% {
-    clip-path: inset(85% -6px 5% 0);
-  }
-  15% {
-    clip-path: inset(10% -6px 85% 0);
-  }
-  20% {
-    clip-path: inset(85% -6px 5% 0);
-  }
-  25% {
-    clip-path: inset(0 0 0 0);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-.cyber-loading::before,
-.cyber-loading::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.cyber-loading::before {
-  animation: glitchBefore 2s infinite;
-  left: 2px;
-  opacity: 0.5;
-}
-
-.cyber-loading::after {
-  animation: glitchAfter 2s infinite;
-  left: -2px;
-  opacity: 0.5;
-}
-
-@keyframes glitchBefore {
-  0% {
-    clip-path: inset(0 0 0 0);
-  }
-  5% {
-    clip-path: inset(30% -6px 70% 0);
-  }
-  10% {
-    clip-path: inset(50% -6px 30% 0);
-  }
-  15% {
-    clip-path: inset(70% -6px 10% 0);
-  }
-  20% {
-    clip-path: inset(10% -6px 85% 0);
-  }
-  25% {
-    clip-path: inset(0 0 0 0);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes glitchAfter {
-  0% {
-    clip-path: inset(0 0 0 0);
-  }
-  5% {
-    clip-path: inset(70% 0 10% -6px);
-  }
-  10% {
-    clip-path: inset(10% 0 85% -6px);
-  }
-  15% {
-    clip-path: inset(30% 0 50% -6px);
-  }
-  20% {
-    clip-path: inset(85% 0 5% -6px);
-  }
-  25% {
-    clip-path: inset(0 0 0 0);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
+.cyber-loading.fade-out {
+  opacity: 0;
 }
 
 .loading-text {
@@ -147,18 +39,12 @@
   background: linear-gradient(45deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: textGlitch 0.5s infinite;
   position: relative;
 }
 
 .loading-text::before,
 .loading-text::after {
-  content: 'INICIALIZANDO SISTEMA';
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  display: none;
 }
 
 .loading-text::before {
@@ -171,14 +57,6 @@
   left: -2px;
   text-shadow: 2px 0 var(--secondary);
   animation: textGlitchAfter 0.5s infinite;
-}
-
-@keyframes textGlitch {
-  0%, 100% { transform: translate(0); }
-  20% { transform: translate(-1px, 1px); }
-  40% { transform: translate(1px, -1px); }
-  60% { transform: translate(-1px, -1px); }
-  80% { transform: translate(1px, 1px); }
 }
 
 @keyframes textGlitchBefore {
@@ -195,6 +73,10 @@
   40% { clip-path: inset(70% 0 30% 0); }
   60% { clip-path: inset(20% 0 80% 0); }
   80% { clip-path: inset(50% 0 50% 0); }
+}
+
+.glitch-overlay {
+  display: none;
 }
 
 .loading-bar-container {
@@ -314,9 +196,7 @@
 }
 
 .cyber-glitch-effect {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .glitch-line {
@@ -368,10 +248,7 @@
 }
 
 .matrix-effect {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  opacity: 0.1;
+  display: none;
 }
 
 .matrix-line {
@@ -491,13 +368,6 @@
   }
 }
 
-.glitch-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 10000;
-}
-
 .glitch-overlay .glitch-line {
   position: absolute;
   height: 1px;
@@ -531,23 +401,7 @@
 }
 
 .detail-label::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background: var(--primary);
-  animation: scanline 2s linear infinite;
-}
-
-@keyframes scanline {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(400%);
-  }
+  display: none;
 }
 
 .loading-detail-line {
@@ -556,30 +410,5 @@
 }
 
 .loading-detail-line::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--primary);
-  opacity: 0;
-  animation: lineFlash 3s linear infinite;
-}
-
-@keyframes lineFlash {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  10% {
-    opacity: 1;
-  }
-  20% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  100% {
-    opacity: 0;
-  }
+  display: none;
 } 
