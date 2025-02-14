@@ -501,4 +501,97 @@ body::before {
   50% {
     transform: translateY(-10px);
   }
+}
+
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.glitch-transition {
+  animation: glitchTransition 0.5s ease-out;
+}
+
+@keyframes glitchTransition {
+  0% {
+    transform: translate(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-20px, 10px);
+    opacity: 0.2;
+    filter: hue-rotate(90deg);
+  }
+  40% {
+    transform: translate(20px, -10px);
+    opacity: 0.5;
+    filter: hue-rotate(-90deg);
+  }
+  60% {
+    transform: translate(-15px, 15px);
+    opacity: 0.7;
+    filter: hue-rotate(180deg);
+  }
+  80% {
+    transform: translate(15px, -15px);
+    opacity: 0.8;
+    filter: hue-rotate(-180deg);
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+    filter: hue-rotate(0);
+  }
+}
+
+.glitch-transition::before,
+.glitch-transition::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.glitch-transition::before {
+  animation: glitchBefore 0.5s steps(2, end) infinite;
+}
+
+.glitch-transition::after {
+  animation: glitchAfter 0.5s steps(2, end) infinite;
+}
+
+@keyframes glitchBefore {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-5px);
+    filter: hue-rotate(90deg);
+  }
+  100% {
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(5px);
+    filter: hue-rotate(-90deg);
+  }
+}
+
+@keyframes glitchAfter {
+  0% {
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(5px);
+    filter: hue-rotate(-90deg);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-5px);
+    filter: hue-rotate(90deg);
+  }
 } 
